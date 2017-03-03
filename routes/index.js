@@ -69,7 +69,7 @@ router.get('/createPortfolio', function(req,res,next){
   var tempPort = {name:req.session.user.name, title:req.session.user.username};
    Portfolio.findOne({'username':req.session.user.username}, function(err,port){
     if(err) return err;
-    if(port===null){
+    if(!port){
       Portfolio.create(tempPort, function(err,user){
       if(err) return err;
 
@@ -78,13 +78,7 @@ router.get('/createPortfolio', function(req,res,next){
     }
   res.render('createPortfolio');
 });
-
-router.post('/addLink', function(req,res,next){
-  Portfolio.findOneAndUpdate('username':req.body.username, $push:'links':req.body.link})
-
-
-
-});
+ })
 
 router.post('/login', function(req,res,next){
   if(req.body.username==='' || req.body.password===''){
@@ -107,7 +101,7 @@ router.post('/login', function(req,res,next){
 
 
 
-  })
+  });
 
 });
 
