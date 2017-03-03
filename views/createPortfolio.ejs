@@ -9,12 +9,28 @@
           <div class="panel-body"><strong>Success! </strong><%= success %></div>
     </div>
   <% } %>
-      <div>
+    <% if (warning && warning.length !== 0) { %>
+      <div class="alert alert-warning">
+          <div class="panel-body"><%= warning %></div>
+    </div>
+  <% } %>
 
+  <div>
+  <strong>Links:</strong><br/>
+    <%data.links.forEach(function(link){%>
+      <p> <%= link %> </p>
+
+      <%})%>
+
+
+
+  </div> 
+      <div>
   <form method="post" action="/addLink" style="margin-top:30px;">
       <h3>Add a link to the portfolio</h3>     
       <div class="form-group">
         <input type="text" class="form-control" placeholder="Link" name="link"></input>
+        <input type="hidden" name="portfolio_id" value="<%= data.id %>" >
       </div>
       <button type="submit" class="btn btn-primary">Add</button>
     </form>

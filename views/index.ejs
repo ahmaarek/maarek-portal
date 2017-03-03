@@ -9,7 +9,20 @@
           <div class="panel-body"><strong>Success! </strong><%= success %></div>
     </div>
   <% } %>
+    <div>
+  <strong>Works:</strong><br/>
+    <%data.forEach(function(porto){%>
 
+      <%porto.links.forEach(function(link){%>
+          <p> <%= link %> by Username: <%= porto.username%>, Name: <%= porto.name%></p> 
+          <%})%>
+
+
+      <%})%>
+
+
+
+  </div> 
   <div>
     <a href="/login" type="button" class="btn btn-primary btn-block">Login</a>
     <a href="/signUp" type="button" class="btn btn-primary btn-block">Sign up</a>

@@ -5,7 +5,18 @@ var User = mongoose.model('user');
 var Portfolio = mongoose.model('portfolio');
 
 router.get('/', function(req,res,next){
-  res.render('index.ejs');
+  var allportos
+  Portfolio.find({}, function(err,portos){
+
+    res.render('index.ejs', {"data":portos});
+
+
+
+
+  });
+
+
+
 });
 
 router.get('/loginSuccess', function(req,res,next){
@@ -63,22 +74,48 @@ router.get('/login', function(req,res,next){
   res.render('login');
 
 });
-
 router.get('/createPortfolio', function(req,res,next){
   console.log(req.session.user);
-  var tempPort = {name:req.session.user.name, title:req.session.user.username};
+  var tempPort = {name:req.session.user.name, username:req.session.user.username};
    Portfolio.findOne({'username':req.session.user.username}, function(err,port){
     if(err) return err;
     if(!port){
       Portfolio.create(tempPort, function(err,user){
       if(err) return err;
-
-
+        req.flash('success', 'Your portfolio was successfully created.')
+        res.redirect('/createPortfolio');
       });
     }
-  res.render('createPortfolio');
+    console.log(req.session.user.username);
+    Portfolio.findOne({'username':req.session.user.username}, function(err,porto){
+    console.log(porto);
+    if(porto)
+    {
+      res.render('createPortfolio', {"data":porto});
+    }  
+
+
+
+    });
 });
  })
+
+router.post('/addLink',function(req,res,next){
+  var portfolio_id = req.body.portfolio_id;
+  Portfolio.findByIdAndUpdate(portfolio_id,{$push: {"links":req.body.link}}, {safe:true, upsert:true, new:true}, function(err, portfolio){
+    console.log(portfolio.links);
+    res.redirect('/createPortfolio');
+
+
+
+
+  })
+
+
+
+
+});
+
 
 router.post('/login', function(req,res,next){
   if(req.body.username==='' || req.body.password===''){

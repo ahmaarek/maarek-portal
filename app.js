@@ -33,6 +33,7 @@ app.use(function(req,res,next){
 	res.locals.res = res;
 	res.locals.error = req.flash('error');
 	res.locals.success = req.flash('success');
+	res.locals.warning = req.flash('warning');
 	next();
 });
 
