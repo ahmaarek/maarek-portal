@@ -1,0 +1,22 @@
+<html>
+
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <h2 class="jumbotron text-right" style="font-family:'Courier New'">maarek portal<% if(req.session.user){%>
+  <p><%=req.session.user.username%></p>
+  <%}%></h2>
+  
+
+  <div>
+    <a href="/createPortfolio" type="button" class="btn btn-primary btn-block">Create Portfolio</a>
+    <form action="/pictures/upload" method="POST" enctype="multipart/form-data">
+      Select an image to upload:
+      <input type="file" name="image"> 
+      <input type="submit" value="Upload Image">
+    </form>
+
+    
+    <a href="/logout" type="button" class="btn btn-primary btn-block">Log Out</a>
+  </div>
+</html>

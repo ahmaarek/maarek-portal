@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<head>
+	<title>Sign Up</title>
+</head>
+<body>
+  <h2 class="jumbotron text-right" style="font-family:'Courier New'">maarek portal</h2>
+  
+
+	<% if (error && error.length !== 0) { %>
+    	<div class="alert alert-danger">
+      		<div class="panel-body"><strong>Error: </strong><%= error %></div>
+		</div>
+	<% } %>
+	<form method = "post" action="/signUp">
+		<input type="text" name="username" placeholder="Username">
+
+		<input type="password" name="password" placeholder="Password">
+
+		<input type="text" name="name" placeholder="Name">
+
+		<input type="submit" value="Sign Up!">
+
+	</form>
+</body>
+</html>
